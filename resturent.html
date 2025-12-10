@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Dining - Restaurant</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fafafa;
+        }
+        header {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        section {
+            padding: 40px;
+        }
+        h2 {
+            color: #333;
+        }
+        .menu-item {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-left: 5px solid #ff6347;
+        }
+        .reservation-form, .review-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px;
+            background: #ff6347;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .review {
+            background: #fff;
+            padding: 15px;
+            margin-top: 10px;
+            border-left: 5px solid #ffa500;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🍽 New Indian Restaurant</h1>
+    <p>Best Food. Best Experience.</p>
+</header>
+
+<nav>
+    <a href="#menu">Menu</a>
+    <a href="#reservation">Reservations</a>
+    <a href="#reviews">Reviews</a>
+</nav>
+
+<!-- MENU SECTION -->
+<section id="menu">
+    <h2>Our Menu</h2>
+
+    <div class="menu-item">
+        <h3>Dal makhni</h3>
+        <p>Served with vegetables and sauce — $12.99</p>
+    </div>
+
+    <div class="menu-item">
+        <h3>Paneer butter masala</h3>
+        <p>Premium steak cooked to perfection — $18.99</p>
+    </div>
+
+    <div class="menu-item">
+        <h3>Veggie Pasta</h3>
+        <p>Fresh vegetables & creamy sauce — $10.50</p>
+    </div>
+</section>
+
+<!-- RESERVATION -->
+<section id="reservation">
+    <h2>Online Reservation</h2>
+
+    <div class="reservation-form">
+        <label>Name:</label>
+        <input type="text" id="resName">
+
+        <label>Date:</label>
+        <input type="date" id="resDate">
+
+        <label>Time:</label>
+        <input type="time" id="resTime">
+
+        <label>Guests:</label>
+        <input type="number" id="resGuests" min="1">
+
+        <button onclick="saveReservation()">Reserve</button>
+    </div>
+
+    <p id="resMessage" style="color: green; margin-top: 20px;"></p>
+</section>
+
+<!-- CUSTOMER REVIEWS -->
+<section id="reviews">
+    <h2>Customer Reviews</h2>
+
+    <div class="review-form">
+        <label>Name:</label>
+        <input type="text" id="revName">
+
+        <label>Your Review:</label>
+        <textarea id="revText"></textarea>
+
+        <button onclick="addReview()">Submit Review</button>
+    </div>
+
+    <h3 style="margin-top:30px;">Recent Reviews:</h3>
+    <div id="reviewList"></div>
+</section>
+
+<script>
+    // Save reservation (simple local message)
+    function saveReservation() {
+        let name = document.getElementById("resName").value;
+        let date = document.getElementById("resDate").value;
+        let time = document.getElementById("resTime").value;
+        let guests = document.getElementById("resGuests").value;
+
+        if (name === "" || date === "" || time === "" || guests === "") {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        document.getElementById("resMessage").innerHTML =
+            "Thank you, " + name + "! Your reservation for " +
+            guests + " guests on " + date + " at " + time + " has been received.";
+    }
+
+    // Add customer review
+    function addReview() {
+        let name = document.getElementById("revName").value;
+        let text = document.getElementById("revText").value;
+
+        if (name === "" || text === "") {
+            alert("Please fill both fields!");
+            return;
+        }
+
+        let review = document.createElement("div");
+        review.className = "review";
+        review.innerHTML = "<strong>" + name + "</strong><p>" + text + "</p>";
+
+        document.getElementById("reviewList").prepend(review);
+
+        document.getElementById("revName").value = "";
+        document.getElementById("revText").value = "";
+    }
+</script>
+
+</body>
+</html>
